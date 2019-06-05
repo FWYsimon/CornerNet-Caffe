@@ -6,7 +6,7 @@ The original pytorch implementation repository is [here](https://github.com/prin
 
 ## How to use
 ### CC5.0
-I use [cc5.0](https://github.com/dlunion/CC5.0) which is a good extend frame of caffe and support windows. You can watch the introduction by README
+I use [cc5.0](https://github.com/dlunion/CC5.0) which is a good extended frame of caffe and support windows. You can watch the introduction by README
 
 ### PytorchToCaffe
 I convert the original pytorch model to caffemodel by [PytorchToCaffe](https://github.com/xxradon/PytorchToCaffe). And I add some new feature in the pytorch_to_caffe.py. Just look in my pytorch_to_caffe code.
