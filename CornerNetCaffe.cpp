@@ -2,12 +2,20 @@
 
 #include "CornerPool.h"
 #include "UpSample.h"
+#include "ReLU.h"
 
 const float ae_threshold = 0.5;
 const int nms_kernel = 3;
 const int top_k = 100;
 const float nms_threshold = 0.5;
-const int max_per_image = 100;
+const int max_per_image = 1000;
+const bool merge_bbox = false;
+
+vector<string> labelmap = { "person", "bicycle", "car", "motorcycle", "airplane", "bus", "train", "truck", "boat", "traffic light", "fire hydrant",
+"stop sign", "parking meter", "bench", "bird", "cat", "dog", "horse", "sheep", "cow", "elephant", "baer", "zebra", "giraffe", "backpack", "umbrella", "handbag", "tie", "suitcase", "frisbee", "skis", "snowboard",
+"sports ball", "kite", "baseball bat", "baseball glove", "skateboard", "surfboard", "tennis racket", "bottle", "wine glass", "cup", "fork", "knife", "spoon", "bowl", "banana", "apple", "sandwich", "orange",
+"broccoli", "carrot", "hot dog", "pizza", "donut", "cake", "chair", "couch", "potted plant", "bed", "dinning table", "toilet", "tv", "laptop", "mouse", "remote", "keyboard", "cell phone",
+"microwave", "oven", "toaster", "sink", "refrigerator", "book", "clock", "vase", "scissors", "teddy bear", "hair drier", "toothbrush" };
 
 struct CornerBBox {
 	float tl_x;
@@ -19,7 +27,7 @@ struct CornerBBox {
 	float br_score;
 	float score;
 
-	CornerBBox(float tl_x, float tl_y, float br_x, float br_y, float tl_score, float br_score, int cls, float score) : 
+	CornerBBox(float tl_x, float tl_y, float br_x, float br_y, float tl_score, float br_score, int cls, float score) :
 		tl_x(tl_x), tl_y(tl_y), br_x(br_x), br_y(br_y), tl_score(tl_score), br_score(br_score), cls(cls), score(score){
 
 	}
@@ -85,7 +93,7 @@ void max_pool2d(Blob* heat, int kernel, int stride, int pad) {
 			top_data += pooled_width_ * pooled_height_;
 		}
 	}
-	
+
 	top_data = top_data_blob.get()->mutable_cpu_data();
 	bottom_data = heat->mutable_cpu_data();
 
@@ -107,7 +115,7 @@ void nms(Blob* heat, int kernel) {
 
 void heat_topk(vector<float> scores, int K, int height, int width, vector<float>& topk_scores, vector<int>& topk_inds, vector<int>& topk_clses, vector<float>& topk_ys, vector<float>& topk_xs) {
 	topk_scores = scores;
-	
+
 	topk_inds.resize(scores.size());
 	iota(topk_inds.begin(), topk_inds.end(), 0);
 	//std::sort(temp_topk_scores.rbegin(), temp_topk_scores.rend());
@@ -130,7 +138,7 @@ void heat_topk(vector<float> scores, int K, int height, int width, vector<float>
 		topk_ys[i] = topk_inds[i] / width;
 		topk_xs[i] = topk_inds[i] % width;
 	}
-	
+
 }
 
 void topk(vector<float> scores, int num_dets, vector<int>& inds, vector<float>& topk_scores) {
@@ -186,6 +194,9 @@ vector<vector<CornerBBox>> decode(Blob* tl_heat, Blob* tl_embed, Blob* tl_offset
 	float* tl_heat_ptr = tl_heat->mutable_cpu_data();
 	float* br_heat_ptr = br_heat->mutable_cpu_data();
 
+	vector<float> vec_tl_heat(tl_heat_ptr, tl_heat_ptr + tl_heat->channel() * tl_heat->height() * tl_heat->width());
+	vector<float> vec_br_heat(br_heat_ptr, br_heat_ptr + tl_heat->channel() * tl_heat->height() * tl_heat->width());
+
 	CV_Assert(tl_heat->count() == br_heat->count());
 
 	for (int n = 0; n < batch_size; ++n) {
@@ -229,7 +240,7 @@ vector<vector<CornerBBox>> decode(Blob* tl_heat, Blob* tl_embed, Blob* tl_offset
 		vector<float> vec_tl_offset(tl_offset_ptr, tl_offset_ptr + offset_step);
 		vector<float> vec_br_offset(br_offset_ptr, br_offset_ptr + offset_step);
 		vector<float> tl_offsets, br_offsets;
-		
+
 		gather_offset_feat(vec_tl_offset, tl_inds, tl_offsets);
 		gather_offset_feat(vec_br_offset, br_inds, br_offsets);
 
@@ -304,17 +315,152 @@ vector<vector<CornerBBox>> decode(Blob* tl_heat, Blob* tl_embed, Blob* tl_offset
 	return result;
 }
 
-void test(vector<float> scores, int K, vector<int>& inds, vector<float>& top_scores) {
-	inds.resize(scores.size());
-	top_scores = scores;
-	iota(inds.begin(), inds.end(), 0);
-	std::sort(inds.begin(), inds.end(), [&scores](int a, int b) {
-		return scores[a] > scores[b];
-	});
+Mat crop_image(Mat image, int ctx, int cty, int height, int width, vector<float>& border) {
+	int im_height = image.rows;
+	int im_width = image.cols;
 
-	std::sort(top_scores.rbegin(), top_scores.rend());
-	top_scores.resize(K);
-	inds.resize(K);
+	Mat cropped_image = Mat::zeros(height, width, CV_8UC3);
+
+	int x0 = max(0, ctx - width / 2);
+	int x1 = min(ctx + width / 2, im_width);
+	int y0 = max(0, cty - height / 2);
+	int y1 = min(cty + height / 2, im_height);
+
+	int left = ctx - x0;
+	int right = x1 - ctx;
+	int top = cty - y0;
+	int bottom = y1 - cty;
+
+	int cropped_cty = height / 2;
+	int cropped_ctx = width / 2;
+
+	int y_slice_start = cropped_cty - top;
+	int y_slice_end = cropped_cty + bottom;
+	int x_slice_start = cropped_ctx - left;
+	int x_slice_end = cropped_ctx + right;
+
+	int offset_y = y_slice_start - y0;
+	int offset_x = x_slice_start - x0;
+	for (int h = y_slice_start; h < y_slice_end; ++h) {
+		for (int w = x_slice_start; w < x_slice_end; ++w) {
+			//cropped_image.at<int>(h, w) = image.at<int>(h - offset_y, w - offset_x);
+			cropped_image.at<Vec3b>(h, w)[0] = image.at<Vec3b>(h - offset_y, w - offset_x)[0];
+			cropped_image.at<Vec3b>(h, w)[1] = image.at<Vec3b>(h - offset_y, w - offset_x)[1];
+			cropped_image.at<Vec3b>(h, w)[2] = image.at<Vec3b>(h - offset_y, w - offset_x)[2];
+		}
+	}
+
+	border.push_back(cropped_cty - top);
+	border.push_back(cropped_cty + bottom);
+	border.push_back(cropped_ctx - left);
+	border.push_back(cropped_ctx + right);
+
+	return cropped_image;
+}
+
+vector<CornerBBox> soft_nms(vector<CornerBBox> boxes, float sigma = 0.5, float Nt = 0.3, float threshold = 0.001, int method = 0) {
+	int N = boxes.size();
+
+	float max_score = 0;
+	int max_pos = 0;
+	int pos = 0;
+
+	float weight;
+
+	for (int i = 0; i < N; ++i) {
+		max_score = boxes[i].score;
+		max_pos = i;
+
+		float tx1 = boxes[i].tl_x;
+		float ty1 = boxes[i].tl_y;
+		float tx2 = boxes[i].br_x;
+		float ty2 = boxes[i].br_y;
+
+		float ts = boxes[i].score;
+
+		pos = i + 1;
+		while (pos < N) {
+			if (max_score < boxes[pos].score) {
+				max_score = boxes[pos].score;
+				max_pos = pos;
+			}
+			pos += 1;
+		}
+		// add max box as a detection 
+		boxes[i].tl_x = boxes[max_pos].tl_x;
+		boxes[i].tl_y = boxes[max_pos].tl_y;
+		boxes[i].br_x = boxes[max_pos].br_x;
+		boxes[i].br_y = boxes[max_pos].br_y;
+
+		// swap ith box with position of max box
+		boxes[max_pos].tl_x = tx1;
+		boxes[max_pos].tl_y = ty1;
+		boxes[max_pos].br_x = tx2;
+		boxes[max_pos].br_y = ty2;
+		boxes[max_pos].score = ts;
+
+		tx1 = boxes[i].tl_x;
+		ty1 = boxes[i].tl_y;
+		tx2 = boxes[i].br_x;
+		ty2 = boxes[i].br_y;
+
+		ts = boxes[i].score;
+
+		pos = i + 1;
+		// NMS iterations, note that N changes if detection boxes fall below threshold
+		while (pos < N) {
+			float x1 = boxes[pos].tl_x;
+			float y1 = boxes[pos].tl_y;
+			float x2 = boxes[pos].br_x;
+			float y2 = boxes[pos].br_y;
+			float s = boxes[pos].score;
+
+			float area = (x2 - x1 + 1) * (y2 - y1 + 1);
+			float iw = (min(tx2, x2) - max(tx1, x1) + 1);
+			if (iw > 0) {
+				float ih = (min(ty2, y2) - max(ty1, y1) + 1);
+				if (ih > 0) {
+					float ua = (tx2 - tx1 + 1) * (ty2 - ty1 + 1) + area - iw * ih;
+					// #iou between max box and detection box
+					float ov = iw * ih / ua;
+
+					// linear
+					if (method == 1) {
+						if (ov > Nt)
+							weight = 1 - ov;
+						else
+							weight = 1;
+					}
+					else if (method == 2) { // gaussian 
+						weight = exp(-(ov * ov) / sigma);
+					}
+					else { // original nms
+						if (ov > Nt)
+							weight = 0;
+						else
+							weight = 1;
+					}
+
+					boxes[pos].score = weight * boxes[pos].score;
+
+					// if box score falls below threshold, discard the box by swapping with last box
+					// update N
+					if (boxes[pos].score < threshold) {
+						boxes[pos].tl_x = boxes[N - 1].tl_x;
+						boxes[pos].tl_y = boxes[N - 1].tl_y;
+						boxes[pos].br_x = boxes[N - 1].br_x;
+						boxes[pos].br_y = boxes[N - 1].br_y;
+						boxes[pos].score = boxes[N - 1].score;
+						N -= 1;
+						pos -= 1;
+					}
+				}
+			}
+			pos += 1;
+		}
+	}
+	vector<CornerBBox> out = vector<CornerBBox>(boxes.begin(), boxes.begin() + N);
+	return out;
 }
 
 int main() {
@@ -326,6 +472,7 @@ int main() {
 	INSTALL_LAYER(BottomCornerPoolLayer);
 	INSTALL_LAYER(RightCornerPoolLayer);
 	INSTALL_LAYER(Upsample);
+	INSTALL_LAYER(ReLU);
 
 	string deploy = "cornernet.prototxt";
 	string model = "cornernet.caffemodel";
@@ -345,44 +492,115 @@ int main() {
 	Mat show;
 	im.copyTo(show);
 
+	int height = im.rows;
+	int width = im.cols;
+
+	int scale = 1;
+
+	int new_height = height * scale;
+	int new_width = width * scale;
+
+	int new_center_x = new_width / 2;
+	int new_center_y = new_height / 2;
+
+	int inp_height = new_height | 127;
+	int inp_width = new_width | 127;
+
+	int out_height = (inp_height + 1) / 4;
+	int out_width = (inp_width + 1) / 4;
+	float height_ratio = (float)out_height / inp_height;
+	float width_ratio = (float)out_width / inp_width;
+
+	resize(im, im, Size(new_width, new_height));
+
+	//crop image
+	vector<float> border;
+	Mat cropped_image = crop_image(im, new_center_x, new_center_y, inp_height, inp_width, border);
+
 	Scalar mean(0.40789654, 0.44719302, 0.47026115);
 	Scalar std(0.28863828, 0.27408164, 0.27809835);
 
-	im.convertTo(im, CV_32F);
-	im /= 255.0;
-	im -= mean;
-	//im.at<Vec3b>()[0] /= std[0];
-	//im.at<Vec3b>()[1] /= std[1];
-	//im.at<Vec3b>()[2] /= std[2];
+	cropped_image.convertTo(cropped_image, CV_32F);
+	cropped_image /= 255.0;
 
-	for (int i = 0; i < im.rows; ++i) {
-		for (int j = 0; j < im.cols; ++j) {
+	for (int i = 0; i < cropped_image.rows; ++i) {
+		for (int j = 0; j < cropped_image.cols; ++j) {
 			for (int n = 0; n < 3; n++) {
-				im.at<cv::Vec3f>(i, j)[n] /= std[0];
+				cropped_image.at<cv::Vec3f>(i, j)[n] -= mean[n];
+				cropped_image.at<cv::Vec3f>(i, j)[n] /= std[n];
 			}
 		}
 	}
 
+	Blob* input = net->input_blob(0);
+	input->reshape(1, 3, cropped_image.rows, cropped_image.cols);
 
-	Blob* input = net->blob(0);
-	input->setData(0, im);
-	
+	net->reshape();
+	input->setData(0, cropped_image);
+
 	net->forward();
 
 	vector<vector<CornerBBox>> result = decode(tl_heat, tl_embed, tl_offset, br_heat, br_embed, br_offset, top_k, nms_kernel, ae_threshold, max_per_image);
 
-	for (int i = 0; i < result.size(); ++i) {
-		for (int j = 0; j < result[i].size(); ++j) {
-			CornerBBox cbbox = result[i][j];
-			float score = cbbox.score;
-			if (score < 0.6)
-				continue;
-			Rect box(cbbox.tl_x, cbbox.tl_y, cbbox.br_x - cbbox.tl_x, cbbox.br_y - cbbox.br_x);
-			rectangle(show, box, Scalar(255, 255, 0), 2);
+
+	int categories = labelmap.size();
+	//rescale dets
+	vector<CornerBBox> all_boxes = result[0];
+	vector<vector<CornerBBox>> keep_boxes(categories);
+	vector<float> scores;
+	for (int i = 0; i < all_boxes.size(); ++i) {
+		float tl_x = all_boxes[i].tl_x / height_ratio;
+		float tl_y = all_boxes[i].tl_y / width_ratio;
+		float br_x = all_boxes[i].br_x / height_ratio;
+		float br_y = all_boxes[i].br_y / width_ratio;
+		tl_x -= border[2];
+		br_x -= border[2];
+		tl_y -= border[0];
+		br_y -= border[0];
+
+		all_boxes[i].tl_x = max(0, tl_x);
+		all_boxes[i].tl_y = max(0, tl_y);
+		all_boxes[i].br_x = min(br_x, width);
+		all_boxes[i].br_y = min(br_y, height);
+		if (all_boxes[i].score > -1) {
+			keep_boxes[all_boxes[i].cls].push_back(all_boxes[i]);
+			scores.push_back(all_boxes[i].score);
 		}
-		imshow("demo", show);
-		waitKey(0);
 	}
+
+	const int box_per_image = 100;
+	int count_box = 0;
+	vector<CornerBBox> top_bboxes;
+	for (int i = 0; i < categories; ++i) {
+		vector<CornerBBox> box_after_nms = soft_nms(keep_boxes[i], 0.5f, nms_threshold, 2);
+		top_bboxes.insert(top_bboxes.end(), box_after_nms.begin(), box_after_nms.end());
+		count_box += box_after_nms.size();
+	}
+
+	vector<int> remove_inds;
+	if (count_box > box_per_image) {
+		std::sort(scores.begin(), scores.end(), greater<float>());
+		float thresh = scores[box_per_image];
+		for (int i = 0; i < top_bboxes.size(); ++i) {
+			if (top_bboxes[i].score < thresh)
+				remove_inds.push_back(i);
+		}
+	}
+
+	for (int i = 0; i < remove_inds.size(); ++i)
+		top_bboxes.erase(top_bboxes.begin() + remove_inds[i]);
+
+	for (int i = 0; i < top_bboxes.size(); ++i) {
+		CornerBBox cbbox = top_bboxes[i];
+		if (cbbox.score <= 0.5)
+			continue;
+		Rect box(cbbox.tl_x, cbbox.tl_y, cbbox.br_x - cbbox.tl_x, cbbox.br_y - cbbox.tl_y);
+		putText(show, labelmap[cbbox.cls], Point(cbbox.tl_x, cbbox.tl_y), 1, 2, Scalar(255, 0, 0), 2);
+		rectangle(show, box, Scalar(255, 255, 0), 2);
+	}
+
+	imshow("demo", show);
+	waitKey(0);
 
 	return 0;
 }

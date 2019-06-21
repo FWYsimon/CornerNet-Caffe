@@ -46,14 +46,15 @@ void Upsample::setup(const char* name, const char* type, const char* param_str, 
 	const int upsample_h = getParamInt(param, "upsample_h");
 
 	scale_ = scale;
-
-	Blob* top_data = top[0];
-	Blob* bottom_data = bottom[0];
-	top_data->reshape(bottom_data->num(), bottom_data->channel(), upsample_h, upsample_w);
 }
 
 void Upsample::reshape(Blob** bottom, int numBottom, Blob** top, int numTop) {
+	Blob* top_data = top[0];
+	Blob* bottom_data = bottom[0];
+	int height = scale_ * bottom_data->height();
+	int width = scale_ * bottom_data->width();
 
+	top_data->reshape(bottom_data->num(), bottom_data->channel(), height, width);
 }
 
 void Upsample::forward(Blob** bottom, int numBottom, Blob** top, int numTop) {
@@ -77,7 +78,7 @@ void Upsample::forward(Blob** bottom, int numBottom, Blob** top, int numTop) {
 		for (int c = 0; c < channels; ++c) {
 			for (int i = 0; i < height * width; ++i) {
 				int row = i / width;
-				int col = i % height;
+				int col = i % width;
 				int index = row / scale_ * bottom_width + col / scale_;
 				top_data_ptr[i] = bottom_data_ptr[index];
 			}

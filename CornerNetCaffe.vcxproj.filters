@@ -11,13 +11,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CornerNetCaffe.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="CornerPool.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Upsample.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ReLU.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CornerNetCaffe.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,6 +32,9 @@
       <Filter>源文件</Filter>
     </ClInclude>
     <ClInclude Include="UpSample.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ReLU.h">
       <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>

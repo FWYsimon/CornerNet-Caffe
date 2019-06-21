@@ -1,7 +1,9 @@
 #include "CornerPool.h"
 
 void TopCornerPoolLayer::reshape(Blob** bottom, int numBottom, Blob** top, int numTop) {
-
+	Blob* out = top[0];
+	Blob* data = bottom[0];
+	out->reshapeLike(data);
 }
 
 void TopCornerPoolLayer::setup(const char* name, const char* type, const char* param_str, int phase, Blob** bottom, int numBottom, Blob** top, int numTop) {
@@ -25,42 +27,35 @@ void TopCornerPoolLayer::setup(const char* name, const char* type, const char* p
 			mask += height * width;
 		}
 	}
-
-
-	out->reshapeLike(data);
 }
 
 void TopCornerPoolLayer::forward(Blob** bottom, int numBottom, Blob** top, int numTop) {
-	Blob* data = bottom[0];
-	Blob* out = top[0];
-	
-	int batch_size = data->num();
-	int channel = data->channel();
-	int height = data->height();
-	int width = data->width();
+	Blob* bottom_data = bottom[0];
+	Blob* top_data = top[0];
 
-	float* input = data->mutable_cpu_data();
-	float* ptr = out->mutable_cpu_data();
+	int batch_size = bottom_data->num();
+	float* bottom_data_ptr = bottom_data->mutable_cpu_data();
+	float* top_data_ptr = top_data->mutable_cpu_data();
 
-	float* max_ids_ptr = max_ids_.get()->mutable_cpu_data();
-
-	memcpy(ptr, input, data->count());
-
-	for (int i = 0; i < batch_size; i++) {
-		for (int j = 0; j < channel; j++) {
-			//int size = height * width;
-			Mat temp = Mat(height, width, CV_32F, ptr);
-			for (int h = height - 2; h >= 0; h--) {
-				for (int w = 0; w < width; w++) {
-					int index = h * width + w;
-					int compare_index = (h + 1) * width + w;
-					ptr[index] = ptr[index] < ptr[compare_index] ? ptr[compare_index] : ptr[index];
-					max_ids_ptr[index] = ptr[index] < ptr[compare_index] ? max_ids_ptr[compare_index] : index;
+	for (int n = 0; n < batch_size; ++n){
+		for (int c = 0; c < bottom_data->channel(); ++c){
+			Mat input(bottom_data->height(), bottom_data->width(), CV_32FC1, bottom_data_ptr + bottom_data->offset(n, c));
+			Mat tmp(top_data->height(), top_data->width(), CV_32FC1, top_data_ptr + top_data->offset(n, c));
+			input.copyTo(tmp);
+			for (int i = 0; i < tmp.cols; i++){
+				float max = 0.0f;
+				for (int j = tmp.rows - 1; j >= 0; j--){
+					if (j == (tmp.rows - 1)){
+						max = tmp.at<float>(j, i);
+					}
+					if (tmp.at<float>(j, i) > max){
+						max = tmp.at<float>(j, i);
+					}
+					else{
+						tmp.at<float>(j, i) = max;
+					}
 				}
-					
 			}
-			ptr += height * width;
-			max_ids_ptr += height * width;
 		}
 	}
 }
@@ -104,7 +99,9 @@ TopCornerPoolLayer::~TopCornerPoolLayer() {
 }
 
 void LeftCornerPoolLayer::reshape(Blob** bottom, int numBottom, Blob** top, int numTop) {
-
+	Blob* out = top[0];
+	Blob* data = bottom[0];
+	out->reshapeLike(data);
 }
 
 void LeftCornerPoolLayer::setup(const char* name, const char* type, const char* param_str, int phase, Blob** bottom, int numBottom, Blob** top, int numTop) {
@@ -128,41 +125,36 @@ void LeftCornerPoolLayer::setup(const char* name, const char* type, const char* 
 			mask += height * width;
 		}
 	}
-
-
-	out->reshapeLike(data);
 }
 
 void LeftCornerPoolLayer::forward(Blob** bottom, int numBottom, Blob** top, int numTop) {
-	Blob* data = bottom[0];
-	Blob* out = top[0];
+	Blob* bottom_data = bottom[0];
+	Blob* top_data = top[0];
 
-	int batch_size = data->num();
-	int channel = data->channel();
-	int height = data->height();
-	int width = data->width();
+	int batch_size = bottom_data->num();
+	float* bottom_data_ptr = bottom_data->mutable_cpu_data();
+	float* top_data_ptr = top_data->mutable_cpu_data();
 
-	float* input = data->mutable_cpu_data();
-	float* ptr = out->mutable_cpu_data();
-
-	float* max_ids_ptr = max_ids_.get()->mutable_cpu_data();
-
-	memcpy(ptr, input, data->count());
-
-	for (int i = 0; i < batch_size; i++) {
-		for (int j = 0; j < channel; j++) {
-			//int size = height * width;
-			for (int h = 0; h < height; ++h) {
-				for (int w = width - 2; w >= 0; --w) {
-					int index = h * width + w;
-					int compare_index = h * width + w + 1;
-					ptr[index] = ptr[index] < ptr[compare_index] ? ptr[compare_index] : ptr[index];
-					max_ids_ptr[index] = ptr[index] < ptr[compare_index] ? max_ids_ptr[compare_index] : max_ids_ptr[index];
+	for (int n = 0; n < batch_size; ++n){
+		for (int c = 0; c < bottom_data->channel(); ++c){
+			Mat input(bottom_data->height(), bottom_data->width(), CV_32FC1, bottom_data_ptr + bottom_data->offset(n, c));
+			Mat tmp(top_data->height(), top_data->width(), CV_32FC1, top_data_ptr + top_data->offset(n, c));
+			input.copyTo(tmp);
+			for (int i = 0; i < tmp.rows; i++){
+				float max = 0.0f;
+				for (int j = tmp.cols - 1; j >= 0; j--){
+					//printf("%f\n", tmp.at<float>(i, j));
+					if (j == (tmp.cols - 1)){
+						max = tmp.at<float>(i, j);
+					}
+					if (tmp.at<float>(i, j) >= max){
+						max = tmp.at<float>(i, j);
+					}
+					else{
+						tmp.at<float>(i, j) = max;
+					}
 				}
-
 			}
-			ptr += height * width;
-			max_ids_ptr += height * width;
 		}
 	}
 }
@@ -206,7 +198,9 @@ LeftCornerPoolLayer::~LeftCornerPoolLayer() {
 }
 
 void BottomCornerPoolLayer::reshape(Blob** bottom, int numBottom, Blob** top, int numTop) {
-
+	Blob* out = top[0];
+	Blob* data = bottom[0];
+	out->reshapeLike(data);
 }
 
 void BottomCornerPoolLayer::setup(const char* name, const char* type, const char* param_str, int phase, Blob** bottom, int numBottom, Blob** top, int numTop) {
@@ -230,40 +224,35 @@ void BottomCornerPoolLayer::setup(const char* name, const char* type, const char
 			mask += height * width;
 		}
 	}
-
-	out->reshapeLike(data);
 }
 
 void BottomCornerPoolLayer::forward(Blob** bottom, int numBottom, Blob** top, int numTop) {
-	Blob* data = bottom[0];
-	Blob* out = top[0];
-
-	int batch_size = data->num();
-	int channel = data->channel();
-	int height = data->height();
-	int width = data->width();
-
-	float* input = data->mutable_cpu_data();
-	float* ptr = out->mutable_cpu_data();
-
 	float* max_ids_ptr = max_ids_.get()->mutable_cpu_data();
 
-	memcpy(ptr, input, data->count());
+	Blob* bottom_data = bottom[0];
+	Blob* top_data = top[0];
 
-	for (int i = 0; i < batch_size; i++) {
-		for (int j = 0; j < channel; j++) {
-			//int size = height * width;
-			for (int h = 1; h < height; ++h) {
-				for (int w = 0; w < width; ++w) {
-					int index = h * width + w;
-					int compare_index = (h - 1) * width + w;
-					ptr[index] = ptr[index] < ptr[compare_index] ? ptr[compare_index] : ptr[index];
-					max_ids_ptr[index] = ptr[index] < ptr[compare_index] ? max_ids_ptr[compare_index] : max_ids_ptr[index];
+	int batch_size = bottom_data->num();
+	float* bottom_data_ptr = bottom_data->mutable_cpu_data();
+	float* top_data_ptr = top_data->mutable_cpu_data();
+
+	for (int n = 0; n < batch_size; ++n){
+		for (int c = 0; c < bottom_data->channel(); ++c){
+			Mat input(bottom_data->height(), bottom_data->width(), CV_32FC1, bottom_data_ptr + bottom_data->offset(n, c));
+			Mat tmp(top_data->height(), top_data->width(), CV_32FC1, top_data_ptr + top_data->offset(n, c));
+			Mat mask(bottom_data->height(), bottom_data->width(), CV_32FC1, max_ids_->offset(n, c));
+			input.copyTo(tmp);
+			for (int i = 0; i < tmp.cols; i++){
+				float max = 0.0f;
+				for (int j = 0; j <tmp.rows; j++){
+					if (j == 0)
+						max = tmp.at<float>(j, i);
+					if (tmp.at<float>(j, i) > max)
+						max = tmp.at<float>(j, i);
+					else
+						tmp.at<float>(j, i) = max;
 				}
-
 			}
-			ptr += height * width;
-			max_ids_ptr += height * width;
 		}
 	}
 }
@@ -307,7 +296,9 @@ BottomCornerPoolLayer::~BottomCornerPoolLayer() {
 }
 
 void RightCornerPoolLayer::reshape(Blob** bottom, int numBottom, Blob** top, int numTop) {
-
+	Blob* out = top[0];
+	Blob* data = bottom[0];
+	out->reshapeLike(data);
 }
 
 void RightCornerPoolLayer::setup(const char* name, const char* type, const char* param_str, int phase, Blob** bottom, int numBottom, Blob** top, int numTop) {
@@ -331,41 +322,35 @@ void RightCornerPoolLayer::setup(const char* name, const char* type, const char*
 			mask += height * width;
 		}
 	}
-
-
-	out->reshapeLike(data);
 }
 
 void RightCornerPoolLayer::forward(Blob** bottom, int numBottom, Blob** top, int numTop) {
-	Blob* data = bottom[0];
-	Blob* out = top[0];
+	Blob* bottom_data = bottom[0];
+	Blob* top_data = top[0];
+	int batch_size = bottom_data->num();
 
-	int batch_size = data->num();
-	int channel = data->channel();
-	int height = data->height();
-	int width = data->width();
-
-	float* input = data->mutable_cpu_data();
-	float* ptr = out->mutable_cpu_data();
-
-	float* max_ids_ptr = max_ids_.get()->mutable_cpu_data();
-
-	memcpy(ptr, input, data->count());
-
-	for (int i = 0; i < batch_size; i++) {
-		for (int j = 0; j < channel; j++) {
-			//int size = height * width;
-			for (int h = 0; h < height; ++h) {
-				for (int w = 1; w < width; ++w) {
-					int index = h * width + w - 1;
-					int compare_index = h * width + w - 1;
-					ptr[index] = ptr[index] < ptr[compare_index] ? ptr[compare_index] : ptr[index];
-					max_ids_ptr[index] = ptr[index] < ptr[compare_index] ? max_ids_ptr[compare_index] : max_ids_ptr[index];
+	float* bottom_data_ptr = bottom_data->mutable_cpu_data();
+	float* top_data_ptr = top_data->mutable_cpu_data();
+	for (int n = 0; n < batch_size; ++n){
+		for (int c = 0; c < bottom_data->channel(); ++c){
+			Mat input(bottom_data->height(), bottom_data->width(), CV_32FC1, bottom_data_ptr + bottom_data->offset(n, c));
+			Mat tmp(top_data->height(), top_data->width(), CV_32FC1, top_data_ptr + top_data->offset(n, c));
+			input.copyTo(tmp);
+			for (int i = 0; i < tmp.rows; i++){
+				float max = 0.0f;
+				for (int j = 0; j < tmp.cols; j++){
+					//printf("%f\n", tmp.at<float>(i, j));
+					if (j == 0){
+						max = tmp.at<float>(i, j);
+					}
+					if (tmp.at<float>(i, j) >= max){
+						max = tmp.at<float>(i, j);
+					}
+					else{
+						tmp.at<float>(i, j) = max;
+					}
 				}
-
 			}
-			ptr += height * width;
-			max_ids_ptr += height * width;
 		}
 	}
 }

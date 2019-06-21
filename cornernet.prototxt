@@ -28,7 +28,6 @@ layer {
   bottom: "conv_blob1"
   top: "batch_norm_blob1"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -43,9 +42,12 @@ layer {
 }
 layer {
   name: "relu1"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob1"
   top: "relu_blob1"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv2"
@@ -71,7 +73,6 @@ layer {
   bottom: "conv_blob2"
   top: "batch_norm_blob2"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -86,9 +87,12 @@ layer {
 }
 layer {
   name: "relu2"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob2"
   top: "relu_blob2"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv3"
@@ -114,7 +118,6 @@ layer {
   bottom: "conv_blob3"
   top: "batch_norm_blob3"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -151,7 +154,6 @@ layer {
   bottom: "conv_blob4"
   top: "batch_norm_blob4"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -176,9 +178,12 @@ layer {
 }
 layer {
   name: "relu3"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob1"
   top: "relu_blob3"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv5"
@@ -204,7 +209,6 @@ layer {
   bottom: "conv_blob5"
   top: "batch_norm_blob5"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -219,9 +223,12 @@ layer {
 }
 layer {
   name: "relu4"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob5"
   top: "relu_blob4"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv6"
@@ -247,7 +254,6 @@ layer {
   bottom: "conv_blob6"
   top: "batch_norm_blob6"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -272,9 +278,12 @@ layer {
 }
 layer {
   name: "relu5"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob2"
   top: "relu_blob5"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv7"
@@ -300,7 +309,6 @@ layer {
   bottom: "conv_blob7"
   top: "batch_norm_blob7"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -315,9 +323,12 @@ layer {
 }
 layer {
   name: "relu6"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob7"
   top: "relu_blob6"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv8"
@@ -343,7 +354,6 @@ layer {
   bottom: "conv_blob8"
   top: "batch_norm_blob8"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -368,9 +378,12 @@ layer {
 }
 layer {
   name: "relu7"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob3"
   top: "relu_blob7"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv9"
@@ -396,7 +409,6 @@ layer {
   bottom: "conv_blob9"
   top: "batch_norm_blob9"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -411,9 +423,12 @@ layer {
 }
 layer {
   name: "relu8"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob9"
   top: "relu_blob8"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv10"
@@ -439,7 +454,6 @@ layer {
   bottom: "conv_blob10"
   top: "batch_norm_blob10"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -476,7 +490,6 @@ layer {
   bottom: "conv_blob11"
   top: "batch_norm_blob11"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -501,9 +514,12 @@ layer {
 }
 layer {
   name: "relu9"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob4"
   top: "relu_blob9"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv12"
@@ -529,7 +545,6 @@ layer {
   bottom: "conv_blob12"
   top: "batch_norm_blob12"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -544,9 +559,12 @@ layer {
 }
 layer {
   name: "relu10"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob12"
   top: "relu_blob10"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv13"
@@ -572,7 +590,6 @@ layer {
   bottom: "conv_blob13"
   top: "batch_norm_blob13"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -597,9 +614,12 @@ layer {
 }
 layer {
   name: "relu11"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob5"
   top: "relu_blob11"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv14"
@@ -625,7 +645,6 @@ layer {
   bottom: "conv_blob14"
   top: "batch_norm_blob14"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -640,9 +659,12 @@ layer {
 }
 layer {
   name: "relu12"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob14"
   top: "relu_blob12"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv15"
@@ -668,7 +690,6 @@ layer {
   bottom: "conv_blob15"
   top: "batch_norm_blob15"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -693,9 +714,12 @@ layer {
 }
 layer {
   name: "relu13"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob6"
   top: "relu_blob13"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv16"
@@ -721,7 +745,6 @@ layer {
   bottom: "conv_blob16"
   top: "batch_norm_blob16"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -736,9 +759,12 @@ layer {
 }
 layer {
   name: "relu14"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob16"
   top: "relu_blob14"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv17"
@@ -764,7 +790,6 @@ layer {
   bottom: "conv_blob17"
   top: "batch_norm_blob17"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -789,9 +814,12 @@ layer {
 }
 layer {
   name: "relu15"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob7"
   top: "relu_blob15"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv18"
@@ -817,7 +845,6 @@ layer {
   bottom: "conv_blob18"
   top: "batch_norm_blob18"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -832,9 +859,12 @@ layer {
 }
 layer {
   name: "relu16"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob18"
   top: "relu_blob16"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv19"
@@ -860,7 +890,6 @@ layer {
   bottom: "conv_blob19"
   top: "batch_norm_blob19"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -897,7 +926,6 @@ layer {
   bottom: "conv_blob20"
   top: "batch_norm_blob20"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -922,9 +950,12 @@ layer {
 }
 layer {
   name: "relu17"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob8"
   top: "relu_blob17"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv21"
@@ -950,7 +981,6 @@ layer {
   bottom: "conv_blob21"
   top: "batch_norm_blob21"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -965,9 +995,12 @@ layer {
 }
 layer {
   name: "relu18"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob21"
   top: "relu_blob18"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv22"
@@ -993,7 +1026,6 @@ layer {
   bottom: "conv_blob22"
   top: "batch_norm_blob22"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -1018,9 +1050,12 @@ layer {
 }
 layer {
   name: "relu19"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob9"
   top: "relu_blob19"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv23"
@@ -1046,7 +1081,6 @@ layer {
   bottom: "conv_blob23"
   top: "batch_norm_blob23"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -1061,9 +1095,12 @@ layer {
 }
 layer {
   name: "relu20"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob23"
   top: "relu_blob20"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv24"
@@ -1089,7 +1126,6 @@ layer {
   bottom: "conv_blob24"
   top: "batch_norm_blob24"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -1114,9 +1150,12 @@ layer {
 }
 layer {
   name: "relu21"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob10"
   top: "relu_blob21"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv25"
@@ -1142,7 +1181,6 @@ layer {
   bottom: "conv_blob25"
   top: "batch_norm_blob25"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -1157,9 +1195,12 @@ layer {
 }
 layer {
   name: "relu22"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob25"
   top: "relu_blob22"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv26"
@@ -1185,7 +1226,6 @@ layer {
   bottom: "conv_blob26"
   top: "batch_norm_blob26"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -1210,9 +1250,12 @@ layer {
 }
 layer {
   name: "relu23"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob11"
   top: "relu_blob23"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv27"
@@ -1238,7 +1281,6 @@ layer {
   bottom: "conv_blob27"
   top: "batch_norm_blob27"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -1253,9 +1295,12 @@ layer {
 }
 layer {
   name: "relu24"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob27"
   top: "relu_blob24"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv28"
@@ -1281,7 +1326,6 @@ layer {
   bottom: "conv_blob28"
   top: "batch_norm_blob28"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -1318,7 +1362,6 @@ layer {
   bottom: "conv_blob29"
   top: "batch_norm_blob29"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -1343,9 +1386,12 @@ layer {
 }
 layer {
   name: "relu25"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob12"
   top: "relu_blob25"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv30"
@@ -1371,7 +1417,6 @@ layer {
   bottom: "conv_blob30"
   top: "batch_norm_blob30"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -1386,9 +1431,12 @@ layer {
 }
 layer {
   name: "relu26"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob30"
   top: "relu_blob26"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv31"
@@ -1414,7 +1462,6 @@ layer {
   bottom: "conv_blob31"
   top: "batch_norm_blob31"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -1439,9 +1486,12 @@ layer {
 }
 layer {
   name: "relu27"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob13"
   top: "relu_blob27"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv32"
@@ -1467,7 +1517,6 @@ layer {
   bottom: "conv_blob32"
   top: "batch_norm_blob32"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -1482,9 +1531,12 @@ layer {
 }
 layer {
   name: "relu28"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob32"
   top: "relu_blob28"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv33"
@@ -1510,7 +1562,6 @@ layer {
   bottom: "conv_blob33"
   top: "batch_norm_blob33"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -1535,9 +1586,12 @@ layer {
 }
 layer {
   name: "relu29"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob14"
   top: "relu_blob29"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv34"
@@ -1563,7 +1617,6 @@ layer {
   bottom: "conv_blob34"
   top: "batch_norm_blob34"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -1578,9 +1631,12 @@ layer {
 }
 layer {
   name: "relu30"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob34"
   top: "relu_blob30"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv35"
@@ -1606,7 +1662,6 @@ layer {
   bottom: "conv_blob35"
   top: "batch_norm_blob35"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -1631,9 +1686,12 @@ layer {
 }
 layer {
   name: "relu31"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob15"
   top: "relu_blob31"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv36"
@@ -1659,7 +1717,6 @@ layer {
   bottom: "conv_blob36"
   top: "batch_norm_blob36"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -1674,9 +1731,12 @@ layer {
 }
 layer {
   name: "relu32"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob36"
   top: "relu_blob32"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv37"
@@ -1702,7 +1762,6 @@ layer {
   bottom: "conv_blob37"
   top: "batch_norm_blob37"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -1739,7 +1798,6 @@ layer {
   bottom: "conv_blob38"
   top: "batch_norm_blob38"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -1764,9 +1822,12 @@ layer {
 }
 layer {
   name: "relu33"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob16"
   top: "relu_blob33"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv39"
@@ -1792,7 +1853,6 @@ layer {
   bottom: "conv_blob39"
   top: "batch_norm_blob39"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -1807,9 +1867,12 @@ layer {
 }
 layer {
   name: "relu34"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob39"
   top: "relu_blob34"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv40"
@@ -1835,7 +1898,6 @@ layer {
   bottom: "conv_blob40"
   top: "batch_norm_blob40"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -1860,9 +1922,12 @@ layer {
 }
 layer {
   name: "relu35"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob17"
   top: "relu_blob35"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv41"
@@ -1888,7 +1953,6 @@ layer {
   bottom: "conv_blob41"
   top: "batch_norm_blob41"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -1903,9 +1967,12 @@ layer {
 }
 layer {
   name: "relu36"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob41"
   top: "relu_blob36"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv42"
@@ -1931,7 +1998,6 @@ layer {
   bottom: "conv_blob42"
   top: "batch_norm_blob42"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -1956,9 +2022,12 @@ layer {
 }
 layer {
   name: "relu37"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob18"
   top: "relu_blob37"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv43"
@@ -1984,7 +2053,6 @@ layer {
   bottom: "conv_blob43"
   top: "batch_norm_blob43"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -1999,9 +2067,12 @@ layer {
 }
 layer {
   name: "relu38"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob43"
   top: "relu_blob38"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv44"
@@ -2027,7 +2098,6 @@ layer {
   bottom: "conv_blob44"
   top: "batch_norm_blob44"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -2052,9 +2122,12 @@ layer {
 }
 layer {
   name: "relu39"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob19"
   top: "relu_blob39"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv45"
@@ -2080,7 +2153,6 @@ layer {
   bottom: "conv_blob45"
   top: "batch_norm_blob45"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -2095,9 +2167,12 @@ layer {
 }
 layer {
   name: "relu40"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob45"
   top: "relu_blob40"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv46"
@@ -2123,7 +2198,6 @@ layer {
   bottom: "conv_blob46"
   top: "batch_norm_blob46"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -2160,7 +2234,6 @@ layer {
   bottom: "conv_blob47"
   top: "batch_norm_blob47"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -2185,9 +2258,12 @@ layer {
 }
 layer {
   name: "relu41"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob20"
   top: "relu_blob41"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv48"
@@ -2213,7 +2289,6 @@ layer {
   bottom: "conv_blob48"
   top: "batch_norm_blob48"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -2228,9 +2303,12 @@ layer {
 }
 layer {
   name: "relu42"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob48"
   top: "relu_blob42"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv49"
@@ -2256,7 +2334,6 @@ layer {
   bottom: "conv_blob49"
   top: "batch_norm_blob49"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -2281,9 +2358,12 @@ layer {
 }
 layer {
   name: "relu43"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob21"
   top: "relu_blob43"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv50"
@@ -2309,7 +2389,6 @@ layer {
   bottom: "conv_blob50"
   top: "batch_norm_blob50"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -2324,9 +2403,12 @@ layer {
 }
 layer {
   name: "relu44"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob50"
   top: "relu_blob44"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv51"
@@ -2352,7 +2434,6 @@ layer {
   bottom: "conv_blob51"
   top: "batch_norm_blob51"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -2377,9 +2458,12 @@ layer {
 }
 layer {
   name: "relu45"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob22"
   top: "relu_blob45"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv52"
@@ -2405,7 +2489,6 @@ layer {
   bottom: "conv_blob52"
   top: "batch_norm_blob52"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -2420,9 +2503,12 @@ layer {
 }
 layer {
   name: "relu46"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob52"
   top: "relu_blob46"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv53"
@@ -2448,7 +2534,6 @@ layer {
   bottom: "conv_blob53"
   top: "batch_norm_blob53"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -2473,9 +2558,12 @@ layer {
 }
 layer {
   name: "relu47"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob23"
   top: "relu_blob47"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv54"
@@ -2501,7 +2589,6 @@ layer {
   bottom: "conv_blob54"
   top: "batch_norm_blob54"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -2516,9 +2603,12 @@ layer {
 }
 layer {
   name: "relu48"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob54"
   top: "relu_blob48"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv55"
@@ -2544,7 +2634,6 @@ layer {
   bottom: "conv_blob55"
   top: "batch_norm_blob55"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -2569,9 +2658,12 @@ layer {
 }
 layer {
   name: "relu49"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob24"
   top: "relu_blob49"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv56"
@@ -2597,7 +2689,6 @@ layer {
   bottom: "conv_blob56"
   top: "batch_norm_blob56"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -2612,9 +2703,12 @@ layer {
 }
 layer {
   name: "relu50"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob56"
   top: "relu_blob50"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv57"
@@ -2640,7 +2734,6 @@ layer {
   bottom: "conv_blob57"
   top: "batch_norm_blob57"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -2665,9 +2758,12 @@ layer {
 }
 layer {
   name: "relu51"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob25"
   top: "relu_blob51"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv58"
@@ -2693,7 +2789,6 @@ layer {
   bottom: "conv_blob58"
   top: "batch_norm_blob58"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -2708,9 +2803,12 @@ layer {
 }
 layer {
   name: "relu52"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob58"
   top: "relu_blob52"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv59"
@@ -2736,7 +2834,6 @@ layer {
   bottom: "conv_blob59"
   top: "batch_norm_blob59"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -2761,9 +2858,12 @@ layer {
 }
 layer {
   name: "relu53"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob26"
   top: "relu_blob53"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv60"
@@ -2789,7 +2889,6 @@ layer {
   bottom: "conv_blob60"
   top: "batch_norm_blob60"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -2804,9 +2903,12 @@ layer {
 }
 layer {
   name: "relu54"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob60"
   top: "relu_blob54"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv61"
@@ -2832,7 +2934,6 @@ layer {
   bottom: "conv_blob61"
   top: "batch_norm_blob61"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -2869,7 +2970,6 @@ layer {
   bottom: "conv_blob62"
   top: "batch_norm_blob62"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -2894,9 +2994,12 @@ layer {
 }
 layer {
   name: "relu55"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob27"
   top: "relu_blob55"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "upsample1"
@@ -2942,7 +3045,6 @@ layer {
   bottom: "conv_blob63"
   top: "batch_norm_blob63"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -2957,9 +3059,12 @@ layer {
 }
 layer {
   name: "relu56"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob63"
   top: "relu_blob56"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv64"
@@ -2985,7 +3090,6 @@ layer {
   bottom: "conv_blob64"
   top: "batch_norm_blob64"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -3010,9 +3114,12 @@ layer {
 }
 layer {
   name: "relu57"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob29"
   top: "relu_blob57"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv65"
@@ -3038,7 +3145,6 @@ layer {
   bottom: "conv_blob65"
   top: "batch_norm_blob65"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -3053,9 +3159,12 @@ layer {
 }
 layer {
   name: "relu58"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob65"
   top: "relu_blob58"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv66"
@@ -3081,7 +3190,6 @@ layer {
   bottom: "conv_blob66"
   top: "batch_norm_blob66"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -3106,9 +3214,12 @@ layer {
 }
 layer {
   name: "relu59"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob30"
   top: "relu_blob59"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "upsample2"
@@ -3154,7 +3265,6 @@ layer {
   bottom: "conv_blob67"
   top: "batch_norm_blob67"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -3169,9 +3279,12 @@ layer {
 }
 layer {
   name: "relu60"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob67"
   top: "relu_blob60"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv68"
@@ -3197,7 +3310,6 @@ layer {
   bottom: "conv_blob68"
   top: "batch_norm_blob68"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -3222,9 +3334,12 @@ layer {
 }
 layer {
   name: "relu61"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob32"
   top: "relu_blob61"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv69"
@@ -3250,7 +3365,6 @@ layer {
   bottom: "conv_blob69"
   top: "batch_norm_blob69"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -3265,9 +3379,12 @@ layer {
 }
 layer {
   name: "relu62"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob69"
   top: "relu_blob62"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv70"
@@ -3293,7 +3410,6 @@ layer {
   bottom: "conv_blob70"
   top: "batch_norm_blob70"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -3318,9 +3434,12 @@ layer {
 }
 layer {
   name: "relu63"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob33"
   top: "relu_blob63"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "upsample3"
@@ -3366,7 +3485,6 @@ layer {
   bottom: "conv_blob71"
   top: "batch_norm_blob71"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -3381,9 +3499,12 @@ layer {
 }
 layer {
   name: "relu64"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob71"
   top: "relu_blob64"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv72"
@@ -3409,7 +3530,6 @@ layer {
   bottom: "conv_blob72"
   top: "batch_norm_blob72"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -3434,9 +3554,12 @@ layer {
 }
 layer {
   name: "relu65"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob35"
   top: "relu_blob65"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv73"
@@ -3462,7 +3585,6 @@ layer {
   bottom: "conv_blob73"
   top: "batch_norm_blob73"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -3477,9 +3599,12 @@ layer {
 }
 layer {
   name: "relu66"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob73"
   top: "relu_blob66"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv74"
@@ -3505,7 +3630,6 @@ layer {
   bottom: "conv_blob74"
   top: "batch_norm_blob74"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -3542,7 +3666,6 @@ layer {
   bottom: "conv_blob75"
   top: "batch_norm_blob75"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -3567,9 +3690,12 @@ layer {
 }
 layer {
   name: "relu67"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob36"
   top: "relu_blob67"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "upsample4"
@@ -3615,7 +3741,6 @@ layer {
   bottom: "conv_blob76"
   top: "batch_norm_blob76"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -3630,9 +3755,12 @@ layer {
 }
 layer {
   name: "relu68"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob76"
   top: "relu_blob68"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv77"
@@ -3658,7 +3786,6 @@ layer {
   bottom: "conv_blob77"
   top: "batch_norm_blob77"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -3683,9 +3810,12 @@ layer {
 }
 layer {
   name: "relu69"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob38"
   top: "relu_blob69"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv78"
@@ -3711,7 +3841,6 @@ layer {
   bottom: "conv_blob78"
   top: "batch_norm_blob78"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -3726,9 +3855,12 @@ layer {
 }
 layer {
   name: "relu70"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob78"
   top: "relu_blob70"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv79"
@@ -3754,7 +3886,6 @@ layer {
   bottom: "conv_blob79"
   top: "batch_norm_blob79"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -3779,9 +3910,12 @@ layer {
 }
 layer {
   name: "relu71"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob39"
   top: "relu_blob71"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "upsample5"
@@ -3827,7 +3961,6 @@ layer {
   bottom: "conv_blob80"
   top: "batch_norm_blob80"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -3842,9 +3975,12 @@ layer {
 }
 layer {
   name: "relu72"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob80"
   top: "relu_blob72"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv81"
@@ -3870,7 +4006,6 @@ layer {
   bottom: "conv_blob81"
   top: "batch_norm_blob81"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -3907,7 +4042,6 @@ layer {
   bottom: "conv_blob82"
   top: "batch_norm_blob82"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -3932,9 +4066,12 @@ layer {
 }
 layer {
   name: "relu73"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob41"
   top: "relu_blob73"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv83"
@@ -3960,7 +4097,6 @@ layer {
   bottom: "conv_blob83"
   top: "batch_norm_blob83"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -3975,9 +4111,12 @@ layer {
 }
 layer {
   name: "relu74"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob83"
   top: "relu_blob74"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv84"
@@ -4003,7 +4142,6 @@ layer {
   bottom: "conv_blob84"
   top: "batch_norm_blob84"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -4028,9 +4166,12 @@ layer {
 }
 layer {
   name: "relu75"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob42"
   top: "relu_blob75"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv85"
@@ -4056,7 +4197,6 @@ layer {
   bottom: "conv_blob85"
   top: "batch_norm_blob85"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -4071,9 +4211,12 @@ layer {
 }
 layer {
   name: "relu76"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob85"
   top: "relu_blob76"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv86"
@@ -4099,7 +4242,6 @@ layer {
   bottom: "conv_blob86"
   top: "batch_norm_blob86"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -4124,9 +4266,12 @@ layer {
 }
 layer {
   name: "relu77"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob43"
   top: "relu_blob77"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv87"
@@ -4152,7 +4297,6 @@ layer {
   bottom: "conv_blob87"
   top: "batch_norm_blob87"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -4167,9 +4311,12 @@ layer {
 }
 layer {
   name: "relu78"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob87"
   top: "relu_blob78"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv88"
@@ -4195,7 +4342,6 @@ layer {
   bottom: "conv_blob88"
   top: "batch_norm_blob88"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -4220,9 +4366,12 @@ layer {
 }
 layer {
   name: "relu79"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob44"
   top: "relu_blob79"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv89"
@@ -4248,7 +4397,6 @@ layer {
   bottom: "conv_blob89"
   top: "batch_norm_blob89"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -4263,9 +4411,12 @@ layer {
 }
 layer {
   name: "relu80"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob89"
   top: "relu_blob80"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv90"
@@ -4291,7 +4442,6 @@ layer {
   bottom: "conv_blob90"
   top: "batch_norm_blob90"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -4328,7 +4478,6 @@ layer {
   bottom: "conv_blob91"
   top: "batch_norm_blob91"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -4353,9 +4502,12 @@ layer {
 }
 layer {
   name: "relu81"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob45"
   top: "relu_blob81"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv92"
@@ -4381,7 +4533,6 @@ layer {
   bottom: "conv_blob92"
   top: "batch_norm_blob92"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -4396,9 +4547,12 @@ layer {
 }
 layer {
   name: "relu82"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob92"
   top: "relu_blob82"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv93"
@@ -4424,7 +4578,6 @@ layer {
   bottom: "conv_blob93"
   top: "batch_norm_blob93"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -4449,9 +4602,12 @@ layer {
 }
 layer {
   name: "relu83"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob46"
   top: "relu_blob83"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv94"
@@ -4477,7 +4633,6 @@ layer {
   bottom: "conv_blob94"
   top: "batch_norm_blob94"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -4492,9 +4647,12 @@ layer {
 }
 layer {
   name: "relu84"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob94"
   top: "relu_blob84"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv95"
@@ -4520,7 +4678,6 @@ layer {
   bottom: "conv_blob95"
   top: "batch_norm_blob95"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -4545,9 +4702,12 @@ layer {
 }
 layer {
   name: "relu85"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob47"
   top: "relu_blob85"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv96"
@@ -4573,7 +4733,6 @@ layer {
   bottom: "conv_blob96"
   top: "batch_norm_blob96"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -4588,9 +4747,12 @@ layer {
 }
 layer {
   name: "relu86"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob96"
   top: "relu_blob86"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv97"
@@ -4616,7 +4778,6 @@ layer {
   bottom: "conv_blob97"
   top: "batch_norm_blob97"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -4641,9 +4802,12 @@ layer {
 }
 layer {
   name: "relu87"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob48"
   top: "relu_blob87"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv98"
@@ -4669,7 +4833,6 @@ layer {
   bottom: "conv_blob98"
   top: "batch_norm_blob98"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -4684,9 +4847,12 @@ layer {
 }
 layer {
   name: "relu88"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob98"
   top: "relu_blob88"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv99"
@@ -4712,7 +4878,6 @@ layer {
   bottom: "conv_blob99"
   top: "batch_norm_blob99"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -4749,7 +4914,6 @@ layer {
   bottom: "conv_blob100"
   top: "batch_norm_blob100"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -4774,9 +4938,12 @@ layer {
 }
 layer {
   name: "relu89"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob49"
   top: "relu_blob89"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv101"
@@ -4802,7 +4969,6 @@ layer {
   bottom: "conv_blob101"
   top: "batch_norm_blob101"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -4817,9 +4983,12 @@ layer {
 }
 layer {
   name: "relu90"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob101"
   top: "relu_blob90"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv102"
@@ -4845,7 +5014,6 @@ layer {
   bottom: "conv_blob102"
   top: "batch_norm_blob102"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -4870,9 +5038,12 @@ layer {
 }
 layer {
   name: "relu91"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob50"
   top: "relu_blob91"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv103"
@@ -4898,7 +5069,6 @@ layer {
   bottom: "conv_blob103"
   top: "batch_norm_blob103"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -4913,9 +5083,12 @@ layer {
 }
 layer {
   name: "relu92"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob103"
   top: "relu_blob92"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv104"
@@ -4941,7 +5114,6 @@ layer {
   bottom: "conv_blob104"
   top: "batch_norm_blob104"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -4966,9 +5138,12 @@ layer {
 }
 layer {
   name: "relu93"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob51"
   top: "relu_blob93"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv105"
@@ -4994,7 +5169,6 @@ layer {
   bottom: "conv_blob105"
   top: "batch_norm_blob105"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -5009,9 +5183,12 @@ layer {
 }
 layer {
   name: "relu94"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob105"
   top: "relu_blob94"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv106"
@@ -5037,7 +5214,6 @@ layer {
   bottom: "conv_blob106"
   top: "batch_norm_blob106"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -5062,9 +5238,12 @@ layer {
 }
 layer {
   name: "relu95"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob52"
   top: "relu_blob95"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv107"
@@ -5090,7 +5269,6 @@ layer {
   bottom: "conv_blob107"
   top: "batch_norm_blob107"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -5105,9 +5283,12 @@ layer {
 }
 layer {
   name: "relu96"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob107"
   top: "relu_blob96"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv108"
@@ -5133,7 +5314,6 @@ layer {
   bottom: "conv_blob108"
   top: "batch_norm_blob108"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -5170,7 +5350,6 @@ layer {
   bottom: "conv_blob109"
   top: "batch_norm_blob109"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -5195,9 +5374,12 @@ layer {
 }
 layer {
   name: "relu97"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob53"
   top: "relu_blob97"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv110"
@@ -5223,7 +5405,6 @@ layer {
   bottom: "conv_blob110"
   top: "batch_norm_blob110"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -5238,9 +5419,12 @@ layer {
 }
 layer {
   name: "relu98"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob110"
   top: "relu_blob98"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv111"
@@ -5266,7 +5450,6 @@ layer {
   bottom: "conv_blob111"
   top: "batch_norm_blob111"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -5291,9 +5474,12 @@ layer {
 }
 layer {
   name: "relu99"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob54"
   top: "relu_blob99"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv112"
@@ -5319,7 +5505,6 @@ layer {
   bottom: "conv_blob112"
   top: "batch_norm_blob112"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -5334,9 +5519,12 @@ layer {
 }
 layer {
   name: "relu100"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob112"
   top: "relu_blob100"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv113"
@@ -5362,7 +5550,6 @@ layer {
   bottom: "conv_blob113"
   top: "batch_norm_blob113"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -5387,9 +5574,12 @@ layer {
 }
 layer {
   name: "relu101"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob55"
   top: "relu_blob101"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv114"
@@ -5415,7 +5605,6 @@ layer {
   bottom: "conv_blob114"
   top: "batch_norm_blob114"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -5430,9 +5619,12 @@ layer {
 }
 layer {
   name: "relu102"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob114"
   top: "relu_blob102"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv115"
@@ -5458,7 +5650,6 @@ layer {
   bottom: "conv_blob115"
   top: "batch_norm_blob115"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -5483,9 +5674,12 @@ layer {
 }
 layer {
   name: "relu103"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob56"
   top: "relu_blob103"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv116"
@@ -5511,7 +5705,6 @@ layer {
   bottom: "conv_blob116"
   top: "batch_norm_blob116"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -5526,9 +5719,12 @@ layer {
 }
 layer {
   name: "relu104"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob116"
   top: "relu_blob104"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv117"
@@ -5554,7 +5750,6 @@ layer {
   bottom: "conv_blob117"
   top: "batch_norm_blob117"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -5591,7 +5786,6 @@ layer {
   bottom: "conv_blob118"
   top: "batch_norm_blob118"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -5616,9 +5810,12 @@ layer {
 }
 layer {
   name: "relu105"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob57"
   top: "relu_blob105"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv119"
@@ -5644,7 +5841,6 @@ layer {
   bottom: "conv_blob119"
   top: "batch_norm_blob119"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -5659,9 +5855,12 @@ layer {
 }
 layer {
   name: "relu106"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob119"
   top: "relu_blob106"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv120"
@@ -5687,7 +5886,6 @@ layer {
   bottom: "conv_blob120"
   top: "batch_norm_blob120"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -5712,9 +5910,12 @@ layer {
 }
 layer {
   name: "relu107"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob58"
   top: "relu_blob107"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv121"
@@ -5740,7 +5941,6 @@ layer {
   bottom: "conv_blob121"
   top: "batch_norm_blob121"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -5755,9 +5955,12 @@ layer {
 }
 layer {
   name: "relu108"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob121"
   top: "relu_blob108"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv122"
@@ -5783,7 +5986,6 @@ layer {
   bottom: "conv_blob122"
   top: "batch_norm_blob122"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -5808,9 +6010,12 @@ layer {
 }
 layer {
   name: "relu109"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob59"
   top: "relu_blob109"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv123"
@@ -5836,7 +6041,6 @@ layer {
   bottom: "conv_blob123"
   top: "batch_norm_blob123"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -5851,9 +6055,12 @@ layer {
 }
 layer {
   name: "relu110"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob123"
   top: "relu_blob110"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv124"
@@ -5879,7 +6086,6 @@ layer {
   bottom: "conv_blob124"
   top: "batch_norm_blob124"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -5904,9 +6110,12 @@ layer {
 }
 layer {
   name: "relu111"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob60"
   top: "relu_blob111"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv125"
@@ -5932,7 +6141,6 @@ layer {
   bottom: "conv_blob125"
   top: "batch_norm_blob125"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -5947,9 +6155,12 @@ layer {
 }
 layer {
   name: "relu112"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob125"
   top: "relu_blob112"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv126"
@@ -5975,7 +6186,6 @@ layer {
   bottom: "conv_blob126"
   top: "batch_norm_blob126"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -6012,7 +6222,6 @@ layer {
   bottom: "conv_blob127"
   top: "batch_norm_blob127"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -6037,9 +6246,12 @@ layer {
 }
 layer {
   name: "relu113"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob61"
   top: "relu_blob113"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv128"
@@ -6065,7 +6277,6 @@ layer {
   bottom: "conv_blob128"
   top: "batch_norm_blob128"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -6080,9 +6291,12 @@ layer {
 }
 layer {
   name: "relu114"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob128"
   top: "relu_blob114"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv129"
@@ -6108,7 +6322,6 @@ layer {
   bottom: "conv_blob129"
   top: "batch_norm_blob129"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -6133,9 +6346,12 @@ layer {
 }
 layer {
   name: "relu115"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob62"
   top: "relu_blob115"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv130"
@@ -6161,7 +6377,6 @@ layer {
   bottom: "conv_blob130"
   top: "batch_norm_blob130"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -6176,9 +6391,12 @@ layer {
 }
 layer {
   name: "relu116"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob130"
   top: "relu_blob116"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv131"
@@ -6204,7 +6422,6 @@ layer {
   bottom: "conv_blob131"
   top: "batch_norm_blob131"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -6229,9 +6446,12 @@ layer {
 }
 layer {
   name: "relu117"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob63"
   top: "relu_blob117"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv132"
@@ -6257,7 +6477,6 @@ layer {
   bottom: "conv_blob132"
   top: "batch_norm_blob132"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -6272,9 +6491,12 @@ layer {
 }
 layer {
   name: "relu118"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob132"
   top: "relu_blob118"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv133"
@@ -6300,7 +6522,6 @@ layer {
   bottom: "conv_blob133"
   top: "batch_norm_blob133"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -6325,9 +6546,12 @@ layer {
 }
 layer {
   name: "relu119"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob64"
   top: "relu_blob119"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv134"
@@ -6353,7 +6577,6 @@ layer {
   bottom: "conv_blob134"
   top: "batch_norm_blob134"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -6368,9 +6591,12 @@ layer {
 }
 layer {
   name: "relu120"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob134"
   top: "relu_blob120"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv135"
@@ -6396,7 +6622,6 @@ layer {
   bottom: "conv_blob135"
   top: "batch_norm_blob135"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -6421,9 +6646,12 @@ layer {
 }
 layer {
   name: "relu121"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob65"
   top: "relu_blob121"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv136"
@@ -6449,7 +6677,6 @@ layer {
   bottom: "conv_blob136"
   top: "batch_norm_blob136"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -6464,9 +6691,12 @@ layer {
 }
 layer {
   name: "relu122"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob136"
   top: "relu_blob122"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv137"
@@ -6492,7 +6722,6 @@ layer {
   bottom: "conv_blob137"
   top: "batch_norm_blob137"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -6517,9 +6746,12 @@ layer {
 }
 layer {
   name: "relu123"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob66"
   top: "relu_blob123"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv138"
@@ -6545,7 +6777,6 @@ layer {
   bottom: "conv_blob138"
   top: "batch_norm_blob138"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -6560,9 +6791,12 @@ layer {
 }
 layer {
   name: "relu124"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob138"
   top: "relu_blob124"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv139"
@@ -6588,7 +6822,6 @@ layer {
   bottom: "conv_blob139"
   top: "batch_norm_blob139"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -6613,9 +6846,12 @@ layer {
 }
 layer {
   name: "relu125"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob67"
   top: "relu_blob125"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv140"
@@ -6641,7 +6877,6 @@ layer {
   bottom: "conv_blob140"
   top: "batch_norm_blob140"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -6656,9 +6891,12 @@ layer {
 }
 layer {
   name: "relu126"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob140"
   top: "relu_blob126"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv141"
@@ -6684,7 +6922,6 @@ layer {
   bottom: "conv_blob141"
   top: "batch_norm_blob141"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -6721,7 +6958,6 @@ layer {
   bottom: "conv_blob142"
   top: "batch_norm_blob142"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -6746,9 +6982,12 @@ layer {
 }
 layer {
   name: "relu127"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob68"
   top: "relu_blob127"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "upsample6"
@@ -6794,7 +7033,6 @@ layer {
   bottom: "conv_blob143"
   top: "batch_norm_blob143"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -6809,9 +7047,12 @@ layer {
 }
 layer {
   name: "relu128"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob143"
   top: "relu_blob128"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv144"
@@ -6837,7 +7078,6 @@ layer {
   bottom: "conv_blob144"
   top: "batch_norm_blob144"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -6862,9 +7102,12 @@ layer {
 }
 layer {
   name: "relu129"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob70"
   top: "relu_blob129"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv145"
@@ -6890,7 +7133,6 @@ layer {
   bottom: "conv_blob145"
   top: "batch_norm_blob145"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -6905,9 +7147,12 @@ layer {
 }
 layer {
   name: "relu130"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob145"
   top: "relu_blob130"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv146"
@@ -6933,7 +7178,6 @@ layer {
   bottom: "conv_blob146"
   top: "batch_norm_blob146"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -6958,9 +7202,12 @@ layer {
 }
 layer {
   name: "relu131"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob71"
   top: "relu_blob131"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "upsample7"
@@ -7006,7 +7253,6 @@ layer {
   bottom: "conv_blob147"
   top: "batch_norm_blob147"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -7021,9 +7267,12 @@ layer {
 }
 layer {
   name: "relu132"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob147"
   top: "relu_blob132"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv148"
@@ -7049,7 +7298,6 @@ layer {
   bottom: "conv_blob148"
   top: "batch_norm_blob148"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -7074,9 +7322,12 @@ layer {
 }
 layer {
   name: "relu133"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob73"
   top: "relu_blob133"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv149"
@@ -7102,7 +7353,6 @@ layer {
   bottom: "conv_blob149"
   top: "batch_norm_blob149"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -7117,9 +7367,12 @@ layer {
 }
 layer {
   name: "relu134"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob149"
   top: "relu_blob134"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv150"
@@ -7145,7 +7398,6 @@ layer {
   bottom: "conv_blob150"
   top: "batch_norm_blob150"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -7170,9 +7422,12 @@ layer {
 }
 layer {
   name: "relu135"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob74"
   top: "relu_blob135"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "upsample8"
@@ -7218,7 +7473,6 @@ layer {
   bottom: "conv_blob151"
   top: "batch_norm_blob151"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -7233,9 +7487,12 @@ layer {
 }
 layer {
   name: "relu136"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob151"
   top: "relu_blob136"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv152"
@@ -7261,7 +7518,6 @@ layer {
   bottom: "conv_blob152"
   top: "batch_norm_blob152"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -7286,9 +7542,12 @@ layer {
 }
 layer {
   name: "relu137"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob76"
   top: "relu_blob137"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv153"
@@ -7314,7 +7573,6 @@ layer {
   bottom: "conv_blob153"
   top: "batch_norm_blob153"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -7329,9 +7587,12 @@ layer {
 }
 layer {
   name: "relu138"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob153"
   top: "relu_blob138"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv154"
@@ -7357,7 +7618,6 @@ layer {
   bottom: "conv_blob154"
   top: "batch_norm_blob154"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -7394,7 +7654,6 @@ layer {
   bottom: "conv_blob155"
   top: "batch_norm_blob155"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -7419,9 +7678,12 @@ layer {
 }
 layer {
   name: "relu139"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob77"
   top: "relu_blob139"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "upsample9"
@@ -7467,7 +7729,6 @@ layer {
   bottom: "conv_blob156"
   top: "batch_norm_blob156"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -7482,9 +7743,12 @@ layer {
 }
 layer {
   name: "relu140"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob156"
   top: "relu_blob140"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv157"
@@ -7510,7 +7774,6 @@ layer {
   bottom: "conv_blob157"
   top: "batch_norm_blob157"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -7535,9 +7798,12 @@ layer {
 }
 layer {
   name: "relu141"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob79"
   top: "relu_blob141"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv158"
@@ -7563,7 +7829,6 @@ layer {
   bottom: "conv_blob158"
   top: "batch_norm_blob158"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -7578,9 +7843,12 @@ layer {
 }
 layer {
   name: "relu142"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob158"
   top: "relu_blob142"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv159"
@@ -7606,7 +7874,6 @@ layer {
   bottom: "conv_blob159"
   top: "batch_norm_blob159"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -7631,9 +7898,12 @@ layer {
 }
 layer {
   name: "relu143"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob80"
   top: "relu_blob143"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "upsample10"
@@ -7679,7 +7949,6 @@ layer {
   bottom: "conv_blob160"
   top: "batch_norm_blob160"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -7694,9 +7963,12 @@ layer {
 }
 layer {
   name: "relu144"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob160"
   top: "relu_blob144"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv161"
@@ -7722,7 +7994,6 @@ layer {
   bottom: "conv_blob161"
   top: "batch_norm_blob161"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -7737,9 +8008,12 @@ layer {
 }
 layer {
   name: "relu145"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob161"
   top: "relu_blob145"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "top_pool1"
@@ -7774,7 +8048,6 @@ layer {
   bottom: "conv_blob162"
   top: "batch_norm_blob162"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -7789,9 +8062,12 @@ layer {
 }
 layer {
   name: "relu146"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob162"
   top: "relu_blob146"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "left_pool1"
@@ -7836,7 +8112,6 @@ layer {
   bottom: "conv_blob163"
   top: "batch_norm_blob163"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -7873,7 +8148,6 @@ layer {
   bottom: "conv_blob164"
   top: "batch_norm_blob164"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -7898,9 +8172,12 @@ layer {
 }
 layer {
   name: "relu147"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob83"
   top: "relu_blob147"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv165"
@@ -7926,7 +8203,6 @@ layer {
   bottom: "conv_blob165"
   top: "batch_norm_blob165"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -7941,9 +8217,12 @@ layer {
 }
 layer {
   name: "relu148"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob165"
   top: "relu_blob148"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv166"
@@ -7969,7 +8248,6 @@ layer {
   bottom: "conv_blob166"
   top: "batch_norm_blob166"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -7984,9 +8262,12 @@ layer {
 }
 layer {
   name: "relu149"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob166"
   top: "relu_blob149"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "bottom_pool1"
@@ -8021,7 +8302,6 @@ layer {
   bottom: "conv_blob167"
   top: "batch_norm_blob167"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -8036,9 +8316,12 @@ layer {
 }
 layer {
   name: "relu150"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob167"
   top: "relu_blob150"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "right_pool1"
@@ -8083,7 +8366,6 @@ layer {
   bottom: "conv_blob168"
   top: "batch_norm_blob168"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -8120,7 +8402,6 @@ layer {
   bottom: "conv_blob169"
   top: "batch_norm_blob169"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -8145,9 +8426,12 @@ layer {
 }
 layer {
   name: "relu151"
-  type: "ReLU"
+  type: "CPP"
   bottom: "add_blob85"
   top: "relu_blob151"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv170"
@@ -8173,7 +8457,6 @@ layer {
   bottom: "conv_blob170"
   top: "batch_norm_blob170"
   batch_norm_param {
-    use_global_stats: true
     eps: 9.999999747378752e-06
   }
 }
@@ -8188,9 +8471,12 @@ layer {
 }
 layer {
   name: "relu152"
-  type: "ReLU"
+  type: "CPP"
   bottom: "batch_norm_blob170"
   top: "relu_blob152"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv171"
@@ -8215,9 +8501,12 @@ layer {
 }
 layer {
   name: "relu153"
-  type: "ReLU"
+  type: "CPP"
   bottom: "conv_blob171"
   top: "relu_blob153"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv172"
@@ -8263,9 +8552,12 @@ layer {
 }
 layer {
   name: "relu154"
-  type: "ReLU"
+  type: "CPP"
   bottom: "conv_blob173"
   top: "relu_blob154"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv174"
@@ -8311,9 +8603,12 @@ layer {
 }
 layer {
   name: "relu155"
-  type: "ReLU"
+  type: "CPP"
   bottom: "conv_blob175"
   top: "relu_blob155"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv176"
@@ -8359,9 +8654,12 @@ layer {
 }
 layer {
   name: "relu156"
-  type: "ReLU"
+  type: "CPP"
   bottom: "conv_blob177"
   top: "relu_blob156"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv178"
@@ -8407,9 +8705,12 @@ layer {
 }
 layer {
   name: "relu157"
-  type: "ReLU"
+  type: "CPP"
   bottom: "conv_blob179"
   top: "relu_blob157"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv180"
@@ -8455,9 +8756,12 @@ layer {
 }
 layer {
   name: "relu158"
-  type: "ReLU"
+  type: "CPP"
   bottom: "conv_blob181"
   top: "relu_blob158"
+  cpp_param {
+    type: "ReLU"
+  }
 }
 layer {
   name: "conv182"
