@@ -4,6 +4,9 @@ This is just inference code of [Cornernet](https://arxiv.org/pdf/1808.01244v1.pd
 
 The original pytorch implementation repository is [here](https://github.com/princeton-vl/CornerNet)
 
+## Getting Started
+Please use pytorch0.4 because I found that using other version of pytorch to convert model will be wrong. 
+
 ## How to use
 ### CC5.0
 I use [cc5.0](https://github.com/dlunion/CC5.0) which is a good extended frame of caffe and support windows. You can watch the introduction by README
