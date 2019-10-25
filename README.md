@@ -1,2 +1,1 @@
-# CornerNet Caffe
 
